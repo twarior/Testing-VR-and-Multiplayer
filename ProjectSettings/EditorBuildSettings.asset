@@ -11,7 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigame.unity
     guid: af9c8a97c35b03640996238059e17808
+  - enabled: 0
+    path: Assets/Oculus/Platform/Samples/VrBoardGame/Main.unity
+    guid: 1bcd80a3e5eb15543bd65c671c26434f
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 19ff4f8f036d7b642a4313a7fb033d7e, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 9561c1584062e744bac823ba173fa6b6, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: e1f2f100eaa9efa4c859a66d149ce858, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: af320ee3e31087e4bad390ccf3b114ed, type: 2}
