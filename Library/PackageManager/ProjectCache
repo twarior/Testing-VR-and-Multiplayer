@@ -5,21 +5,141 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637666675924331565
-    m_Hash: 3915929533
+      ticks: 637667116594393810
+    m_Hash: 4224228297
   m_LockFileStatus:
     m_FilePath: E:/Program Files/Unity Projects/Testing VR and Multiplayer/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637666675924371713
-    m_Hash: 2931386168
+      ticks: 637667116594513801
+    m_Hash: 3048101151
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
   m_Packages:
     m_ResolvedPackages:
+    - packageId: com.normalvr.normcore@2.1.8
+      testable: 0
+      isDirectDependency: 1
+      version: 2.1.8
+      source: 1
+      resolvedPath: E:\Program Files\Unity Projects\Testing VR and Multiplayer\Library\PackageCache\com.normalvr.normcore@2.1.8
+      assetPath: Packages/com.normalvr.normcore
+      name: com.normalvr.normcore
+      displayName: Normcore
+      author:
+        name: Normal
+        email: max@normalvr.com
+        url: https://normcore.io
+      category: 
+      type: 
+      description: Your friendly neighborhood networking plugin :)
+      status: 4
+      errors: []
+      versions:
+        all:
+        - 2.0.0-preview.6
+        - 2.0.0-preview.7
+        - 2.0.0-preview.8
+        - 2.0.0-preview.10
+        - 2.0.0-preview.11
+        - 2.0.0-preview.12
+        - 2.0.0-preview.13
+        - 2.0.0-preview.14
+        - 2.0.0-preview.15
+        - 2.0.0-preview.17
+        - 2.0.0-preview.18
+        - 2.0.0-preview.19
+        - 2.0.0-preview.20
+        - 2.0.0
+        - 2.0.1
+        - 2.0.3
+        - 2.1.0
+        - 2.1.1
+        - 2.1.2
+        - 2.1.3
+        - 2.1.4
+        - 2.1.5
+        - 2.1.6-rc1
+        - 2.1.6-rc2
+        - 2.1.6-rc3
+        - 2.1.6
+        - 2.1.7
+        - 2.1.8
+        - 3.0.0-shopify-preview.4
+        - 3.0.0-shopify-preview.5
+        - 3.0.0-webgl-preview.1
+        - 3.0.0-webgl-preview.2
+        - 3.0.0-webgl-preview.6
+        compatible:
+        - 2.0.0-preview.6
+        - 2.0.0-preview.7
+        - 2.0.0-preview.8
+        - 2.0.0-preview.10
+        - 2.0.0-preview.11
+        - 2.0.0-preview.12
+        - 2.0.0-preview.13
+        - 2.0.0-preview.14
+        - 2.0.0-preview.15
+        - 2.0.0-preview.17
+        - 2.0.0-preview.18
+        - 2.0.0-preview.19
+        - 2.0.0-preview.20
+        - 2.0.0
+        - 2.0.1
+        - 2.0.3
+        - 2.1.0
+        - 2.1.1
+        - 2.1.2
+        - 2.1.3
+        - 2.1.4
+        - 2.1.5
+        - 2.1.6-rc1
+        - 2.1.6-rc2
+        - 2.1.6-rc3
+        - 2.1.6
+        - 2.1.7
+        - 2.1.8
+        - 3.0.0-shopify-preview.4
+        - 3.0.0-shopify-preview.5
+        - 3.0.0-webgl-preview.1
+        - 3.0.0-webgl-preview.2
+        - 3.0.0-webgl-preview.6
+        verified: 
+      dependencies:
+      - name: com.unity.editorcoroutines
+        version: 1.0.0
+      resolvedDependencies:
+      - name: com.unity.editorcoroutines
+        version: 1.0.0
+      keywords:
+      - normal
+      - normcore
+      - multiplayer
+      registry:
+        id: scoped:Normal
+        name: Normal
+        url: https://normcore-registry.normcore.io
+        scopes:
+        - com.normalvr
+        - io.normcore
+        isDefault: 0
+        capabilities: 0
+      hasRegistry: 1
+      hideInEditor: 1
+      entitlements:
+        isAllowed: 1
+      isAssetStorePackage: 0
+      datePublishedTicks: 637625785616260000
+      documentationUrl: 
+      hasRepository: 0
+      repository:
+        type: 
+        url: 
+        revision: 
+        path: 
     - packageId: com.unity.collab-proxy@1.7.1
       testable: 0
       isDirectDependency: 1
@@ -3900,6 +4020,70 @@ m_PackageAssets:
         type: git
         url: https://github.cds.internal.unity3d.com/unity/com.unity.nuget.newtonsoft-json.git
         revision: d2fd6ed876261bbd82f59199ad711e7667bf633a
+        path: 
+    - packageId: com.unity.editorcoroutines@1.0.0
+      testable: 0
+      isDirectDependency: 0
+      version: 1.0.0
+      source: 1
+      resolvedPath: E:\Program Files\Unity Projects\Testing VR and Multiplayer\Library\PackageCache\com.unity.editorcoroutines@1.0.0
+      assetPath: Packages/com.unity.editorcoroutines
+      name: com.unity.editorcoroutines
+      displayName: Editor Coroutines
+      author:
+        name: 
+        email: 
+        url: 
+      category: 
+      type: 
+      description: 'The editor coroutines package allows developers to start constructs
+        similar to Unity''s monobehaviour based coroutines within the editor using
+        abitrary objects. '
+      status: 4
+      errors: []
+      versions:
+        all:
+        - 0.0.1-preview.3
+        - 0.0.1-preview.4
+        - 0.0.1-preview.5
+        - 0.0.2-preview.1
+        - 0.1.0-preview.1
+        - 0.1.0-preview.2
+        - 1.0.0
+        compatible:
+        - 0.0.1-preview.3
+        - 0.0.1-preview.4
+        - 0.0.1-preview.5
+        - 0.0.2-preview.1
+        - 0.1.0-preview.1
+        - 0.1.0-preview.2
+        - 1.0.0
+        verified: 1.0.0
+      dependencies: []
+      resolvedDependencies: []
+      keywords:
+      - coroutine
+      - coroutines
+      - editor
+      registry:
+        id: main
+        name: 
+        url: https://packages.unity.com
+        scopes: []
+        isDefault: 1
+        capabilities: 7
+      hasRegistry: 1
+      hideInEditor: 1
+      entitlements:
+        isAllowed: 1
+      isAssetStorePackage: 0
+      datePublishedTicks: 637232611380000000
+      documentationUrl: 
+      hasRepository: 1
+      repository:
+        type: git
+        url: https://github.cds.internal.unity3d.com/unity/com.unity.editorcoroutines.git
+        revision: f67fc9992bbc7a553b17375de53a8b2db136528e
         path: 
     - packageId: com.unity.subsystemregistration@1.0.6
       testable: 0
