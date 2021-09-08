@@ -10,6 +10,11 @@ public class KeyboardPlayerController : MonoBehaviour {
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
 
+    public bool AButton;
+    public bool BButton;
+    public Vector2 LeftStick;
+    
+
     private Rigidbody rb;
     private int cubesPickedUp;
     private float movementX;
@@ -23,15 +28,26 @@ public class KeyboardPlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
 
         cubesPickedUp = 0;
-        SetCountText();
+        //SetCountText();
         winTextObject.SetActive(false);
     }
 
     // Update is called once per frame
     void FixedUpdate() {
+        OVRInput.FixedUpdate();
+        VRContollerInput();
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
 
         rb.AddForce(movement * speed);
+
+    }
+
+    void Update() {
+        OVRInput.Update();
+        AButton = OVRInput.Get(OVRInput.RawButton.A);
+        if (AButton == true) {
+            winTextObject.SetActive(true);
+        }
     }
 
 
@@ -55,10 +71,29 @@ public class KeyboardPlayerController : MonoBehaviour {
 
     void SetCountText () {
         countText.text = "Count: " + cubesPickedUp.ToString();
-
-        if(cubesPickedUp >= 12) {
+        if (cubesPickedUp >= 12) {
             winTextObject.SetActive(true);
         }
     }
+
+    void VRContollerInput() {
+        // returns a Vector2 of the primary (typically the Left) thumbstick’s current state.
+        // (X/Y range of -1.0f to 1.0f)
+        var tempLeft = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+        var tempRight = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
+        countText.text = tempLeft.ToString();
+        if (tempLeft != null) {
+            LeftStick = (tempLeft);
+            movementX = tempLeft.x;
+            movementY = tempLeft.y;
+        }
+        else if (tempRight != null) {
+            movementX = tempRight.x;
+            movementY = tempRight.y;
+        }
+
+        
+    }
+
 
 }

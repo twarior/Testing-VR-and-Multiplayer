@@ -164,6 +164,61 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "Oculus",
+                    "id": "89e13ae8-558d-4bbd-8827-f4ef8f139b28",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "97945eb2-4ff9-4bec-98b9-9ebb1ce9a7bd",
+                    "path": "<OculusTouchController>/thumbstick/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Oculus Controllers",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "e528c755-a80c-4a8e-a767-8c61061184f4",
+                    "path": "<OculusTouchController>/thumbstick/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Oculus Controllers",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "963a196c-0bd7-420c-a559-7cf11ddeea43",
+                    "path": "<OculusTouchController>/thumbstick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Oculus Controllers",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "de2dfd6a-0a72-45f4-8387-cc270b162035",
+                    "path": "<OculusTouchController>/thumbstick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Oculus Controllers",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "c1f7a91b-d0fd-4a62-997e-7fb9b69bf235",
                     "path": "<Gamepad>/rightStick",
@@ -816,6 +871,27 @@
             "devices": [
                 {
                     "devicePath": "<XRController>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Oculus Controllers",
+            "bindingGroup": "Oculus Controllers",
+            "devices": [
+                {
+                    "devicePath": "<OculusTouchController>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<OpenVROculusTouchController>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<OculusGoController>",
                     "isOptional": false,
                     "isOR": false
                 }
