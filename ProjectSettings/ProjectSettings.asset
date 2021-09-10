@@ -139,8 +139,8 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: 9561c1584062e744bac823ba173fa6b6, type: 2}
-  - {fileID: 3825352195958373987, guid: af320ee3e31087e4bad390ccf3b114ed, type: 2}
-  - {fileID: 4899964983285837618, guid: e1f2f100eaa9efa4c859a66d149ce858, type: 2}
+  - {fileID: -6858700238626828917, guid: af320ee3e31087e4bad390ccf3b114ed, type: 2}
+  - {fileID: -4664905795683776164, guid: e1f2f100eaa9efa4c859a66d149ce858, type: 2}
   - {fileID: 11400000, guid: 19ff4f8f036d7b642a4313a7fb033d7e, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -690,6 +690,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
+    1: NORMCORE
     7: NORMCORE
   additionalCompilerArguments: {}
   platformArchitecture: {}

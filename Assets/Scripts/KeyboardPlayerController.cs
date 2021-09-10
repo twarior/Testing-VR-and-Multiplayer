@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using System.Runtime.InteropServices.ComTypes;
 
 public class KeyboardPlayerController : MonoBehaviour {
 
@@ -20,6 +21,7 @@ public class KeyboardPlayerController : MonoBehaviour {
     private float movementX;
     private float movementY;
 
+
     //From Unity's roll a ball tutorial
 
     // Start is called before the first frame update
@@ -35,9 +37,13 @@ public class KeyboardPlayerController : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate() {
         OVRInput.FixedUpdate();
-        VRContollerInput();
+        bool VRThumb = VRContollerInput();
+        if (!VRThumb) {
+            //print("running keybaord input");
+            KeyboardInput();
+        }
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-
+        
         rb.AddForce(movement * speed);
 
     }
@@ -76,24 +82,52 @@ public class KeyboardPlayerController : MonoBehaviour {
         }
     }
 
-    void VRContollerInput() {
+    bool VRContollerInput() {
         // returns a Vector2 of the primary (typically the Left) thumbstick’s current state.
         // (X/Y range of -1.0f to 1.0f)
         var tempLeft = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
         var tempRight = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
-        countText.text = tempLeft.ToString();
-        if (tempLeft != null) {
+        bool thumbStick = false;
+        //countText.text = tempLeft.ToString();
+        if (tempLeft != new Vector2(0f,0f)) {
             LeftStick = (tempLeft);
             movementX = tempLeft.x;
             movementY = tempLeft.y;
+            thumbStick = true;
         }
-        else if (tempRight != null) {
+        else if (tempRight != new Vector2(0f, 0f)) {
             movementX = tempRight.x;
             movementY = tempRight.y;
+            thumbStick = true;
         }
-
-        
+        //print(thumbStick);
+        return thumbStick;
     }
-
+    
+    void KeyboardInput() {
+        var tempFB = 0f;
+        var tempLR = 0f;
+        
+        if (Input.GetKey(KeyCode.W)) {
+            tempFB += 1;
+            //Debug.Log("W");
+        }
+        if (Input.GetKey(KeyCode.S)) {
+            tempFB -= 1;
+           // Debug.Log("S");
+        }
+        if (Input.GetKey(KeyCode.A)) {
+            tempLR -= 1;
+            //Debug.Log("A");
+        }
+        if (Input.GetKey(KeyCode.D)) {
+            tempLR += 1;
+            //Debug.Log("D");
+        }
+        //print(tempFB);
+        //print(tempLR);
+        movementX = tempLR;
+        movementY = tempFB;
+    }
 
 }
