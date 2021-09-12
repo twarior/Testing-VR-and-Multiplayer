@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using System.Runtime.InteropServices.ComTypes;
+using Normal.Realtime;
 
 public class KeyboardPlayerController : MonoBehaviour {
 
@@ -21,6 +22,15 @@ public class KeyboardPlayerController : MonoBehaviour {
     private float movementX;
     private float movementY;
 
+    private RealtimeView _realtimeView;
+
+
+
+    private void Awake() {
+        _realtimeView = gameObject.GetComponentInParent(typeof(RealtimeView)) as RealtimeView;
+    }
+
+
 
     //From Unity's roll a ball tutorial
 
@@ -34,8 +44,20 @@ public class KeyboardPlayerController : MonoBehaviour {
         winTextObject.SetActive(false);
     }
 
+    private void Update() {
+        // Call LocalUpdate() only if this instance is owned by the local client
+        if (_realtimeView.isOwnedLocallyInHierarchy)
+            LocalUpdate();
+    }
+
+    private void FixedUpdate() {
+        // Call LocalFixedUpdate() only if this instance is owned by the local client
+        if (_realtimeView.isOwnedLocallyInHierarchy)
+            LocalFixedUpdate();
+    }
+
     // Update is called once per frame
-    void FixedUpdate() {
+    void LocalFixedUpdate() {
         OVRInput.FixedUpdate();
         bool VRThumb = VRContollerInput();
         if (!VRThumb) {
@@ -48,7 +70,7 @@ public class KeyboardPlayerController : MonoBehaviour {
 
     }
 
-    void Update() {
+    void LocalUpdate() {
         OVRInput.Update();
         AButton = OVRInput.Get(OVRInput.RawButton.A);
         if (AButton == true) {
