@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+using Normal.Realtime;
 
 public class Brush : MonoBehaviour {
+    //Reference to Realtime to use to instantiate brush strokes
+    [SerializeField] private Realtime _realtime;
+
     // Prefab to instantiate when we draw a new brush stroke
     [SerializeField] private GameObject _brushStrokePrefab = null;
 
@@ -16,6 +20,9 @@ public class Brush : MonoBehaviour {
     private BrushStroke _activeBrushStroke;
 
     private void Update() {
+        if (!_realtime.connected)
+            return;
+
         // Start by figuring out which hand we're tracking
         XRNode node    = _hand == Hand.LeftHand ? XRNode.LeftHand : XRNode.RightHand;
         string trigger = _hand == Hand.LeftHand ? "Oculus_CrossPlatform_PrimaryIndexTrigger" : "Oculus_CrossPlatform_SecondaryIndexTrigger";
@@ -33,7 +40,7 @@ public class Brush : MonoBehaviour {
         // If the trigger is pressed and we haven't created a new brush stroke to draw, create one!
         if (triggerPressed && _activeBrushStroke == null) {
             // Instantiate a copy of the Brush Stroke prefab.
-            GameObject brushStrokeGameObject = Instantiate(_brushStrokePrefab);
+            GameObject brushStrokeGameObject = Realtime.Instantiate(_brushStrokePrefab.name, ownedByClient: true, useInstance: _realtime);
 
             // Grab the BrushStroke component from it
             _activeBrushStroke = brushStrokeGameObject.GetComponent<BrushStroke>();

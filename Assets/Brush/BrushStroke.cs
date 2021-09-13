@@ -1,20 +1,11 @@
-﻿using System.Collections.Generic;
+﻿
 using UnityEngine;
+using Normal.Realtime;
+using Normal.Realtime.Serialization;
 
-public class BrushStroke : MonoBehaviour {
+public class BrushStroke : RealtimeComponent<BrushStrokeModel> {
     [SerializeField]
-    private BrushStrokeMesh _mesh = null;
-
-    // Ribbon State
-    struct RibbonPoint {
-        public Vector3    position;
-        public Quaternion rotation;
-    }
-    private List<RibbonPoint> _ribbonPoints = new List<RibbonPoint>();
-
-    private Vector3    _brushTipPosition;
-    private Quaternion _brushTipRotation;
-    private bool       _brushStrokeFinalized;
+    private BrushStrokeMesh _mesh;
 
     // Smoothing
     private Vector3    _ribbonEndPosition;
@@ -36,8 +27,8 @@ public class BrushStroke : MonoBehaviour {
     // Interface
     public void BeginBrushStrokeWithBrushTipPoint(Vector3 position, Quaternion rotation) {
         // Update the model
-        _brushTipPosition = position;
-        _brushTipRotation = rotation;
+        model.brushTipPosition = position;
+        model.brushTipRotation = rotation;
 
         // Update last ribbon point to match brush tip position & rotation
         _ribbonEndPosition = position;
@@ -46,21 +37,25 @@ public class BrushStroke : MonoBehaviour {
     }
 
     public void MoveBrushTipToPoint(Vector3 position, Quaternion rotation) {
-        _brushTipPosition = position;
-        _brushTipRotation = rotation;
+        model.brushTipPosition = position;
+        model.brushTipRotation = rotation;
     }
 
     public void EndBrushStrokeWithBrushTipPoint(Vector3 position, Quaternion rotation) {
         // Add a final ribbon point and mark the stroke as finalized
         AddRibbonPoint(position, rotation);
-        _brushStrokeFinalized = true;
+        model.brushStrokeFinalized = true;
     }
 
 
     // Ribbon drawing
     private void AddRibbonPointIfNeeded() {
+        //only add ribon points if this bruish stroke is being drawn byt the local client
+        if (!realtimeView.isOwnedLocallySelf)
+            return;
+
         // If the brush stroke is finalized, stop trying to add points to it.
-        if (_brushStrokeFinalized)
+        if (model.brushStrokeFinalized)
             return;
 
         if (Vector3.Distance(_ribbonEndPosition, _previousRibbonPointPosition) >= 0.01f ||
@@ -77,25 +72,57 @@ public class BrushStroke : MonoBehaviour {
 
     private void AddRibbonPoint(Vector3 position, Quaternion rotation) {
         // Create the ribbon point
-        RibbonPoint ribbonPoint = new RibbonPoint();
+        RibbonPointModel ribbonPoint = new RibbonPointModel();
         ribbonPoint.position = position;
         ribbonPoint.rotation = rotation;
-        _ribbonPoints.Add(ribbonPoint);
+        model.ribbonPoints.Add(ribbonPoint);
 
         // Update the mesh
         _mesh.InsertRibbonPoint(position, rotation);
     }
 
+    private void RibbonPointAdded(RealtimeArray<RibbonPointModel> ribbonPoints, RibbonPointModel ribbonPoint, bool remote) {
+        // Add ribbon point to the mesh
+        _mesh.InsertRibbonPoint(ribbonPoint.position, ribbonPoint.rotation);
+    }
+
+    protected override void OnRealtimeModelReplaced(BrushStrokeModel previousModel, BrushStrokeModel currentModel) {
+        //Clear Mesh
+        _mesh.ClearRibbon();
+
+        if (previousModel != null) {
+            // Unregister from events
+            previousModel.ribbonPoints.modelAdded -= RibbonPointAdded;
+        }
+
+        if (currentModel != null) {
+            // Replace ribbon mesh
+            foreach (RibbonPointModel ribbonPoint in currentModel.ribbonPoints)
+                _mesh.InsertRibbonPoint(ribbonPoint.position, ribbonPoint.rotation);
+
+            // Update last ribbon point to match brush tip position & rotation
+            _ribbonEndPosition = model.brushTipPosition;
+            _ribbonEndRotation = model.brushTipRotation;
+            _mesh.UpdateLastRibbonPoint(model.brushTipPosition, model.brushTipRotation);
+
+            // Turn off the last ribbon point if this brush stroke is finalized
+            _mesh.skipLastRibbonPoint = model.brushStrokeFinalized;
+
+            // Let us know when a new ribbon point is added to the mesh
+            currentModel.ribbonPoints.modelAdded += RibbonPointAdded;
+        }
+    }
+
     // Brush tip + smoothing
     private void AnimateLastRibbonPointTowardsBrushTipPosition() {
         // If the brush stroke is finalized, skip the brush tip mesh, and stop animating the brush tip.
-        if (_brushStrokeFinalized) {
+        if (model.brushStrokeFinalized) {
             _mesh.skipLastRibbonPoint = true;
             return;
         }
 
-        Vector3    brushTipPosition = _brushTipPosition;
-        Quaternion brushTipRotation = _brushTipRotation;
+        Vector3    brushTipPosition = model.brushTipPosition;
+        Quaternion brushTipRotation = model.brushTipRotation;
 
         // If the end of the ribbon has reached the brush tip position, we can bail early.
         if (Vector3.Distance(_ribbonEndPosition, brushTipPosition) <= 0.0001f &&
