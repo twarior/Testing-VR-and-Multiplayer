@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637667116594393810
-    m_Hash: 4224228297
+      ticks: 637670941709433246
+    m_Hash: 898552642
   m_LockFileStatus:
     m_FilePath: E:/Program Files/Unity Projects/Testing VR and Multiplayer/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637667116594513801
-    m_Hash: 3048101151
+      ticks: 637670941709433246
+    m_Hash: 4037997808
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -566,6 +566,7 @@ m_PackageAssets:
         - 1.1.0-preview.1
         - 1.1.0-preview.2
         - 1.1.0-preview.3
+        - 1.1.1
         compatible:
         - 0.1.2-preview
         - 0.2.0-preview
@@ -596,6 +597,7 @@ m_PackageAssets:
         - 1.1.0-preview.1
         - 1.1.0-preview.2
         - 1.1.0-preview.3
+        - 1.1.1
         verified: 1.0.2
       dependencies: []
       resolvedDependencies: []
